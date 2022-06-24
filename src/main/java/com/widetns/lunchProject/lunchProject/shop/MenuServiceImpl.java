@@ -22,5 +22,10 @@ public class MenuServiceImpl implements MenuService {
     public void insertShop(MenuVO vo) {
         menurepo.save(vo);
     }
+
+    // 글 상세보기
+    /*public MenuVO detailShop(MenuVO vo) {
+        return menurepo.findById(vo.getShopNum()).get();
+    }*/
 }
 

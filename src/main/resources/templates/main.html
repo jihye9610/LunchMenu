@@ -13,39 +13,10 @@
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-  <!-- Navbar Brand-->
-  <a class="navbar-brand ps-3" href="main.html">오늘 뭐 먹지?</a>
-  <!-- Sidebar Toggle-->
-  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-  <!-- 로그인 -->
-  <a href="login.html" id="login"><i class="fas fa-user fa-fw"></i>LOGIN</a>
-  <!-- Navbar Search-->
-  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-    <div class="input-group">
-      <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-      <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-    </div>
-  </form>
-</nav>
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
 <div id="layoutSidenav">
-  <div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-      <div class="sb-sidenav-menu">
-        <div class="nav">
-          <div class="sb-sidenav-menu-heading">Menu</div>
-          <a class="nav-link" href="main.html">
-            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-            MAIN
-          </a>
-          <a class="nav-link" href="tables.html">
-            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-            Tables
-          </a>
-        </div>
-      </div>
-    </nav>
-  </div>
+<th:block th:replace="fragments/sideBar :: sideBarFragment"></th:block>
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid px-4">
@@ -75,13 +46,66 @@
               <tbody>
               <tr th:each="shop : ${shoplist}">
                 <td th:text="${shop.shopNum}"></td>
-                <td><a th:text="${shop.shopName}"></a></td>
+                <td th:text="${shop.shopName}"></td>
+                <!--<td><a th:text="${shop.shopName}" th:href='@{/board/getBoard(seq=${board.seq})}' data-bs-toggle="modal" data-bs-target="#detailShop"></a></td>-->
                 <td th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
               </tbody>
             </table>
-          </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertShop">글 작성</button>
+
+            <!-- 글 작성 모달 창 -->
+            <form th:action="@{/saveShop}">
+              <div class="modal fade" id="insertShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="insertShopLabel">글 등록</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">가게이름</label>
+                          <input type="text" class="form-control" id="recipient-name" name="shopName">
+                        </div>
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">한줄평</label>
+                          <input type="text" class="form-control" id="recipient-intro" name="shopIntro">
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">상세내용</label>
+                          <textarea class="form-control" id="message-text" rows="10" name="shopContent"></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">글 등록</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- 글 상세보기 -->
+            <!--<div class="modal fade" id="detailShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="detailShopLabel" th:value="${detail.shopName}"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div th:value=""${detail.shopContent}></div>
+                  </div>
+                  <div><a href="#">좋아요</a> </div>
+                </div>
+              </div>
+            </div>-->
+
+         </div>
         </div>
       </div>
     </main>
@@ -96,3 +120,5 @@
 
 </body>
 </html>
+
+

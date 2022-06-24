@@ -31,6 +31,12 @@ public class MenuController {
     @GetMapping("saveShop")
     public String saveShop(MenuVO vo) {
         menuservice.insertShop(vo);
-        return "redirect:menuBoard";
+        return "redirect:main";
     }
+
+    // 글 상세보기
+    /*@PostMapping("/main")
+    public void detailShop(MenuVO vo, Model m) {
+        m.addAttribute("detail", menuservice.detailShop(vo));
+    }*/
 }
