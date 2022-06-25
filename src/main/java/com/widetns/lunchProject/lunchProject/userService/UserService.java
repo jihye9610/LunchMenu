@@ -1,8 +1,8 @@
 package com.widetns.lunchProject.lunchProject.userService;
 
-import com.widetns.lunchProject.lunchProject.userDomain.TestUserDomain;
+import com.widetns.lunchProject.lunchProject.entity.Member;
 
 public interface UserService {
 
-    public TestUserDomain checkUser(TestUserDomain user);
+    public Member checkUser(Member user);
 }

@@ -9,7 +9,7 @@ $('#btnLogin').click(function(){
 
 	var userId = $.trim($("#userId").val());
 	var userPassword = $.trim($("#userPassword").val());
-	
+
 
 	/* 이메일 */
 	if(userId == ''){
@@ -33,8 +33,8 @@ $('#btnLogin').click(function(){
   $.ajax({
 	type : 'get',
 	url : '/loginMove',
-	data : { userId : $("#userId").val(),
-		userPassword : $("#userPassword").val()
+	data : { id : $("#userId").val(),
+		password : $("#userPassword").val()
 	 		},
 	contentType : 'application/x-www-form-urlencoded;charset=utf-8',
 	success : function(result){
@@ -45,7 +45,8 @@ $('#btnLogin').click(function(){
 			
 			}else{
 			// 결과가 result = "Y"이면 로그인 성공 -> loginMove.do로 이동
-        		document.loginForm.submit();
+
+			document.loginForm.submit();
 			}
 	},
 	error : function(err){
