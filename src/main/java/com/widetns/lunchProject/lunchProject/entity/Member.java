@@ -23,5 +23,5 @@ public class Member {
 
         private String password;
 
-        private String id;
+        private String id;// 카카오 id 연동
 }
