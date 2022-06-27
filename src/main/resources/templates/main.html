@@ -49,9 +49,9 @@
               <tbody>
               <tr th:each="shop : ${shoplist}">
                 <!--<td th:text="${shop.shopName}"></td>-->
-                <input name="shopNum" type="hidden" th:value="${shop.shopNum}">
-                <td><a id="modaltitle" data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
-                <td th:text="${shop.shopIntro}"></td>
+                <input name="shopNum" type="hidden" th:text="${shop.shopNum}" th:value="|${shop.shopNum}|" class="shopNum">
+                <td><a id="modaltitle" data-bs-toggle="modal" data-bs-target="#detailShosp" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
+                <td id="shopIntro" th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
               </tbody>
@@ -127,11 +127,10 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="./js/datatables-simple-demo.js"></script>
 <script>
-
 $(document). on("click", "#modaltitle", function(){
+    const shopNum = $(".shopNum").val();
+    alert("!!!!!!!!!!!!!!!"+shopNum);
 
-    var shopNum = $("input[name=shopNum]").val();
-    alert(shopNum);
     $.ajax({
       url : "/detailShop/"+shopNum,
       type : "get",
