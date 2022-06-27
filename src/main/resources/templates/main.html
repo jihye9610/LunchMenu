@@ -47,10 +47,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="shop : ${shoplist}" id="modaltitle" th:value="${shop.shopNum}">
+              <tr th:each="shop : ${shoplist}" id="modaltitle">
                 <!--<td th:text="${shop.shopName}"></td>-->
-                <input name="shopNum" type="hidden" th:value="${shop.shopNum}" data-bs-toggle="modal" data-bs-target="#detailShop">
-                <td th:text="${shop.shopName}"></td>
+                <input name="shopNum" type="hidden" th:value="${shop.shopNum}">
+                <td><a data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
                 <td th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
@@ -132,7 +132,6 @@
 
     var shopNum = $("#modaltitle > input[name=shopNum]").val();
     alert(shopNum);
-    shopNum.add()
     $.ajax({
       url : "/detailShop/"+shopNum,
       type : "get",
