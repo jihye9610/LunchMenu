@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService{
     public Member checkUser(Member user){
 
 
-        return repo.findByIdAndPassword(user.getId(),user.getPassword());
+        return repo.findByMemberIdAndPassword(user.getMemberId(),user.getPassword());
     }
 
 

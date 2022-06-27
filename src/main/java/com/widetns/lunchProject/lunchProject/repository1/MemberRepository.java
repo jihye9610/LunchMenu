@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
-    Member findByIdAndPassword(String userId, String userPassword);
+    Member findByMemberIdAndPassword(String memberId, String userPassword);
 
     boolean existsBymemberId(String MemberId);
 
