@@ -23,7 +23,7 @@
       <div class="container-fluid px-4">
         <h1 class="mt-4">오늘의 추천 식당</h1>
         <div class="row">
-          <div class="col-xl-3 col-md-6">sss
+          <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
               <div class="card-body">추천 많은 식당</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
@@ -47,10 +47,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="shop : ${shoplist}" id="modaltitle">
+              <tr th:each="shop : ${shoplist}">
                 <!--<td th:text="${shop.shopName}"></td>-->
                 <input name="shopNum" type="hidden" th:value="${shop.shopNum}">
-                <td><a data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
+                <td><a id="modaltitle" data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
                 <td th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
@@ -128,9 +128,9 @@
 <script src="./js/datatables-simple-demo.js"></script>
 <script>
 
-  $(document). on("click", "#modaltitle", function(){
+$(document). on("click", "#modaltitle", function(){
 
-    var shopNum = $("#modaltitle > input[name=shopNum]").val();
+    var shopNum = $("input[name=shopNum]").val();
     alert(shopNum);
     $.ajax({
       url : "/detailShop/"+shopNum,

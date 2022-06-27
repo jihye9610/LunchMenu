@@ -36,6 +36,7 @@ public class MenuController {
     @GetMapping("/detailShop/{shopNum}")
     @ResponseBody
     public MenuVO detailShop(@PathVariable Integer shopNum) {
+
         return menuservice.detailShop(shopNum);
     }
 }
