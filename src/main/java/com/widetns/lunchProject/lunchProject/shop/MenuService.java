@@ -14,7 +14,9 @@ public interface MenuService {
     // 글 상세보기
     public MenuVO detailShop( Integer shopNum);
     // 글 수정
+    public void modifyShop(MenuVO newVo);
 
     // 글 삭제
+    public void deleteShop(Integer id);
 
 }

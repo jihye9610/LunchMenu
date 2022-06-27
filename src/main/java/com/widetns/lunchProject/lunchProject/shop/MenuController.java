@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 
 @Controller
 public class MenuController {
@@ -38,6 +40,24 @@ public class MenuController {
     public MenuVO detailShop(@PathVariable Integer shopNum) {
         return menuservice.detailShop(shopNum);
     }
+
+    @PutMapping("/detailShop/{shopNum}")
+    @ResponseBody
+    public String deleteShop(@PathVariable Integer shopNum){
+        menuservice.deleteShop(shopNum);
+
+        return "redirect:/detailShop";
+    }
+
+    @DeleteMapping("/detailShop/{shopNum}")
+    @ResponseBody
+    public String updateShop(@PathVariable MenuVO vo){
+        menuservice.insertShop(vo);
+
+        return "redirect:/main";
+    }
+
+
 }
 
 
