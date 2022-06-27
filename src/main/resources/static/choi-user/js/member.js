@@ -33,12 +33,12 @@ $('#btnLogin').click(function(){
   $.ajax({
 	type : 'get',
 	url : '/loginMove',
-	data : { id : $("#userId").val(),
+	data : { memberId : $("#userId").val(),
 		password : $("#userPassword").val()
 	 		},
 	contentType : 'application/x-www-form-urlencoded;charset=utf-8',
 	success : function(result){
-		alert(result)
+
 		// 중복 검사 후 나오는 결과 에러박스에 출력
 		if(result == "N"){
         		$('.error_box.login').html("존재하는 회원이 아니거나 비밀번호가 일치하지 않습니다.");
