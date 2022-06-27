@@ -12,7 +12,7 @@ public class MenuVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shop_num")
-    private int shopNum;
+    private Integer shopNum;
 
     @Column(name = "shop_name" , length = 200)
     private String shopName;

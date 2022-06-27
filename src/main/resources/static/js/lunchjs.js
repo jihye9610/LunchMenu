@@ -1,1 +1,3 @@
 $("#lanchtbl").DataTable();
+
+

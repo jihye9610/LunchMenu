@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
   <link href="./css/styles.css" rel="stylesheet" />
   <link href="./css/lunchcss.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -22,7 +23,7 @@
       <div class="container-fluid px-4">
         <h1 class="mt-4">오늘의 추천 식당</h1>
         <div class="row">
-          <div class="col-xl-3 col-md-6">
+          <div class="col-xl-3 col-md-6">sss
             <div class="card bg-primary text-white mb-4">
               <div class="card-body">추천 많은 식당</div>
               <div class="card-footer d-flex align-items-center justify-content-between">
@@ -32,27 +33,30 @@
           </div>
 
         </div>
+
         <div class="card mb-4">
           <div class="card-body">
-            <table id="lanchtbl" class="lanchtbl">
+
+
+            <table id="lunchtbl" class="lunchtbl">
               <thead>
               <tr>
-                <th>No.</th>
                 <th>가게 이름</th>
                 <th>한줄평</th>
                 <th>좋아요</th>
               </tr>
               </thead>
               <tbody>
-              <tr th:each="shop : ${shoplist}">
-                <td th:text="${shop.shopNum}"></td>
+              <tr th:each="shop : ${shoplist}" id="modaltitle" th:value="${shop.shopNum}">
+                <!--<td th:text="${shop.shopName}"></td>-->
+                <input name="shopNum" type="hidden" th:value="${shop.shopNum}" data-bs-toggle="modal" data-bs-target="#detailShop">
                 <td th:text="${shop.shopName}"></td>
-                <!--<td><a th:text="${shop.shopName}" th:href='@{/board/getBoard(seq=${board.seq})}' data-bs-toggle="modal" data-bs-target="#detailShop"></a></td>-->
                 <td th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
               </tbody>
             </table>
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertShop">글 작성</button>
 
             <!-- 글 작성 모달 창 -->
@@ -90,20 +94,25 @@
             </form>
 
             <!-- 글 상세보기 -->
-            <!--<div class="modal fade" id="detailShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!--<form th:action="@{/modifyShop}">-->
+            <!--<input name="shopNum" type="hidden" th:value="${shop?.shopNum}">-->
+            <div class="modal fade" id="detailShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="detailShopLabel" th:value="${detail.shopName}"></h5>
+                    <!--<h5 class="modal-title" id="detailShopLabel" th:value="${detail.shopName}"></h5>-->
+                    <h5 class="modal-title shopName" id="detailShopLabel">제목</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div th:value=""${detail.shopContent}></div>
+                    <!--<div th:value="${detail.shopContent}"></div>-->
+                    <div class="shopContent">내용</div>
                   </div>
-                  <div><a href="#">좋아요</a> </div>
+                  <div><a href="#"><i class="bi bi-heart"></i></a></div>
                 </div>
               </div>
-            </div>-->
+            </div>
+<!--            </form>-->
 
          </div>
         </div>
@@ -117,6 +126,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="./js/datatables-simple-demo.js"></script>
+<script>
+
+  $(document). on("click", "#modaltitle", function(){
+
+    var shopNum = $("#modaltitle > input[name=shopNum]").val();
+    alert(shopNum);
+    shopNum.add()
+    $.ajax({
+      url : "/detailShop/"+shopNum,
+      type : "get",
+      dataType:"json",
+      contentType:"application/json",
+      success:function(data) {
+        console.log(data);
+        $(".shopName").text(data.shopName);
+        $(".shopContent").text(data.shopContent);
+      },
+      error : function(e) {
+        alert("@@@@@@@@@@@@"+e)
+        console.log(e)
+      }
+    })
+  })
+
+</script>
 
 </body>
 </html>

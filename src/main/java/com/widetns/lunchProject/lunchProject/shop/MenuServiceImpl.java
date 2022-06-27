@@ -2,6 +2,7 @@ package com.widetns.lunchProject.lunchProject.shop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     // 글 상세보기
-    /*public MenuVO detailShop(MenuVO vo) {
-        return menurepo.findById(vo.getShopNum()).get();
-    }*/
+    public MenuVO detailShop( Integer shopNum) {
+        return menurepo.findById(shopNum).get();
+    }
 }
 

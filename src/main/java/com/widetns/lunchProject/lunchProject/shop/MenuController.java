@@ -3,9 +3,7 @@ package com.widetns.lunchProject.lunchProject.shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -35,8 +33,39 @@ public class MenuController {
     }
 
     // 글 상세보기
-    /*@PostMapping("/main")
-    public void detailShop(MenuVO vo, Model m) {
-        m.addAttribute("detail", menuservice.detailShop(vo));
-    }*/
+    @GetMapping("/detailShop/{shopNum}")
+    @ResponseBody
+    public MenuVO detailShop(@PathVariable Integer shopNum) {
+        return menuservice.detailShop(shopNum);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
