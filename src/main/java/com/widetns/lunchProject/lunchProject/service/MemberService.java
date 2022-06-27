@@ -1,7 +1,7 @@
 package com.widetns.lunchProject.lunchProject.service;
 
 import com.widetns.lunchProject.lunchProject.entity.Member;
-import com.widetns.lunchProject.lunchProject.repository1.JpaStoreRepository;
+import com.widetns.lunchProject.lunchProject.repository1.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,21 +15,21 @@ import java.util.List;
 public class MemberService {
 
     @Autowired
-    private final JpaStoreRepository jpaStoreRepository;
+    private final MemberRepository memberRepository;
 
 
     public Integer join(Member member){
 //        validateDuplicateMember(member);
-        jpaStoreRepository.save(member);
+        memberRepository.save(member);
         return member.getUserIdx();
     }
 
     public boolean existsByMemberId(String MemberId){
-        return jpaStoreRepository.existsBymemberId(MemberId);
+        return memberRepository.existsBymemberId(MemberId);
     }
 
     public List<Member> findAll(){
-        return jpaStoreRepository.findAll();
+        return memberRepository.findAll();
     }
 
 
