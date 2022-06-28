@@ -16,6 +16,7 @@ public class MenuController {
     @GetMapping("main")
     public String menuBoard(Model m) {
         m.addAttribute("shoplist", menuservice.getBoardList());
+
         return "main";
     }
 
@@ -36,7 +37,8 @@ public class MenuController {
     @GetMapping("/detailShop/{shopNum}")
     @ResponseBody
     public MenuVO detailShop(@PathVariable Integer shopNum) {
-        return menuservice.detailShop(shopNum);
+        MenuVO result = menuservice.detailShop(shopNum);
+        return result;
     }
 }
 

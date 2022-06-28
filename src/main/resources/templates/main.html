@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -47,10 +47,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="shop : ${shoplist}">
+              <tr th:each="shop : ${shoplist}" id="modaltitle" th:abc="${shop.shopNum}">
                 <!--<td th:text="${shop.shopName}"></td>-->
-                <input name="shopNum" type="hidden" th:text="${shop.shopNum}" th:value="|${shop.shopNum}|" class="shopNum">
-                <td><a id="modaltitle" data-bs-toggle="modal" data-bs-target="#detailShosp" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
+                <td><a class="shopTitle" data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
                 <td id="shopIntro" th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
               </tr>
@@ -98,17 +97,17 @@
             <!--<input name="shopNum" type="hidden" th:value="${shop?.shopNum}">-->
             <div class="modal fade" id="detailShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" id="modal-detail">
                   <div class="modal-header">
-                    <!--<h5 class="modal-title" id="detailShopLabel" th:value="${detail.shopName}"></h5>-->
-                    <h5 class="modal-title shopName" id="detailShopLabel">제목</h5>
+                    <h5 class="modal-title shopName" id="detailShopLabel"></h5>
+                    <a href="#" class="likeheart"><i class="bi bi-heart"></i></a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <!--<div th:value="${detail.shopContent}"></div>-->
-                    <div class="shopContent">내용</div>
+                    <div class="shopIntro"></div>
+                    <hr />
+                    <div class="shopContent"></div>
                   </div>
-                  <div><a href="#"><i class="bi bi-heart"></i></a></div>
                 </div>
               </div>
             </div>
@@ -128,8 +127,8 @@
 <script src="./js/datatables-simple-demo.js"></script>
 <script>
 $(document). on("click", "#modaltitle", function(){
-    const shopNum = $(".shopNum").val();
-    alert("!!!!!!!!!!!!!!!"+shopNum);
+
+    const shopNum = $(this).attr('abc')
 
     $.ajax({
       url : "/detailShop/"+shopNum,
@@ -139,6 +138,7 @@ $(document). on("click", "#modaltitle", function(){
       success:function(data) {
         console.log(data);
         $(".shopName").text(data.shopName);
+        $(".shopIntro").text(data.shopIntro);
         $(".shopContent").text(data.shopContent);
       },
       error : function(e) {
