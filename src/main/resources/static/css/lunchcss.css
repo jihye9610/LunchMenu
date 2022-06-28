@@ -1,10 +1,26 @@
 @charset "UTF-8";
 
-/* Main CSS */
-#login {
-    color: white;
-    text-decoration: none;
+.shopNumhidden {
+    display: none;
 }
-#login:hover {
-    text-decoration-line: underline
+
+.likeheart {
+    color: red;
+    margin: 0 10%;
+}
+/* 글 목록 가게 이름 */
+.shopTitle {
+    color: #000;
+    text-decoration-line: none;
+}
+
+/* 상세보기 CSS */
+.shopIntro {
+    font-size: 85%;
+}
+.shopContent {
+    font-size: 110%;
+}
+#modal-detail {
+    margin-top: 28%;
 }

@@ -25,7 +25,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     // 글 상세보기
-    public MenuVO detailShop( Integer shopNum) {
+    public MenuVO detailShop(Integer shopNum) {
         return menurepo.findById(shopNum).get();
     }
 }
