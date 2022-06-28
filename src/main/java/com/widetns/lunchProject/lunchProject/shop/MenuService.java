@@ -10,13 +10,15 @@ public interface MenuService {
     public List<MenuVO> getBoardList();
 
     // 글 작성
-    public void insertShop(MenuVO vo);
+    public String insertShop(MenuVO vo);
     // 글 상세보기
     public MenuVO detailShop( Integer shopNum);
     // 글 수정
     public void modifyShop(MenuVO newVo);
 
     // 글 삭제
-    public void deleteShop(Integer id);
+    public void deleteShop(String name);
+
+    public MenuVO findByshopName(String name);
 
 }

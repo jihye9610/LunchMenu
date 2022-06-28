@@ -4,6 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MenuRepository extends CrudRepository<MenuVO, Integer> {
 
-//    public void deleteById(Integer id);
+    public void deleteByshopName(String name);
+
+    public MenuVO findByshopName(String name);
 
 }
