@@ -52,6 +52,7 @@
                 <td><a class="shopTitle" data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
                 <td id="shopIntro" th:text="${shop.shopIntro}"></td>
                 <td th:text="${shop.shopLike}"></td>
+
               </tr>
               </tbody>
             </table>
@@ -99,15 +100,25 @@
               <div class="modal-dialog">
                 <div class="modal-content" id="modal-detail">
                   <div class="modal-header">
-                    <h5 class="modal-title shopName" id="detailShopLabel"></h5>
+<!--                    <h5 class="modal-title shopName" id="detailShopLabel"></h5>-->
+                    <input type="text" class="modal-title shopName" id="detailShopLabel" style="border:none"/>
                     <a href="#" class="likeheart"><i class="bi bi-heart"></i></a>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <div class="shopIntro"></div>
+                    <input type="text" class="shopIntro" name="shopIntro" style="border:none">
                     <hr />
-                    <div class="shopContent"></div>
-                  </div>
+<!--                    <div class="shopContent"></div>-->
+                    <input class="shopContent" name="shopContent" style="border:none" />
+                    <input type="hidden" id="deleteNum" name="deleteNum"  />
+                    <input type="hidden" id="shoName" name="shopName"/>
+<!--                    <input type="hidden" id="shopit" name="shopit"/>-->
+                    <input type="hidden" id="shopContent" name="shopContent"/>
+                    <br>
+                    <br>
+                    <button type="button" id="modify" class="btn btn-primary" >수정</button>
+                    <button type="button" id="delete" class="btn text-white" style="background-color:red" >삭제</button>
+                  </input>
                 </div>
               </div>
             </div>
@@ -116,6 +127,7 @@
          </div>
         </div>
       </div>
+      </div>>
     </main>
   </div>
 </div>
@@ -137,9 +149,13 @@ $(document). on("click", "#modaltitle", function(){
       contentType:"application/json",
       success:function(data) {
         console.log(data);
-        $(".shopName").text(data.shopName);
-        $(".shopIntro").text(data.shopIntro);
-        $(".shopContent").text(data.shopContent);
+        $(".shopName").val(data.shopName);
+        $(".shopIntro").val(data.shopIntro);
+        $(".shopContent").val(data.shopContent);
+        $("#deleteNum").val(data.shopNum);
+<!--        $('#shoName').val(data.shopName);-->
+<!--        $('#shopit').val(data.shopIntro);-->
+<!--        $('#shopContent').val(data.shopContent);-->
       },
       error : function(e) {
         alert("@@@@@@@@@@@@"+e)
@@ -147,6 +163,58 @@ $(document). on("click", "#modaltitle", function(){
       }
     })
   })
+
+
+
+$('#delete').click(function(){
+
+      var id = $('#deleteNum').val();
+
+    $.ajax({
+      url: "/detailShop/" + id,
+      method: "DELETE",
+      dataType: "text",
+      success: function(data){
+        alert("삭제되었습니다.");
+        location.href="main";
+      },
+      error : function(){
+      alert("싪패.")
+
+      }
+    })
+  })
+
+
+  $('#modify').click(function(){
+
+       var id = $('#deleteNum').val();
+       var title = $('.shopName').val();
+       var intro = $('.shopIntro').val();
+       var content = $('.shopContent').val();
+
+
+
+    $.ajax({
+      url: "/detailShop/" + id,
+      method: "PUT",
+      dataType: "text",
+      data: {
+             shopIntro : $('.shopIntro').val(),
+             shopName : title,
+             shopContent : content
+      },
+      success: function(e){
+        alert("업데이트 성공");
+        location.href="main";
+      },
+      error: function(status){
+        alert(status + "Error");
+        console.log(status)
+      }
+    });
+  })
+
 
 </script>
 

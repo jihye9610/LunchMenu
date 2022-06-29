@@ -37,7 +37,7 @@ public class MemberController {
 
 //        checkDuplicateId(member.getId());
         memberService.join(member);
-        return "redirect:/home";
+        return "redirect:/main";
     }
 
     @GetMapping("members")

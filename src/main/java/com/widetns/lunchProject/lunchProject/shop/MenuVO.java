@@ -1,12 +1,16 @@
 package com.widetns.lunchProject.lunchProject.shop;
 
+import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="shop")
+@NoArgsConstructor
 public class MenuVO {
 
     @Id
@@ -25,5 +29,23 @@ public class MenuVO {
 
     @Column(name = "shop_like")
     private int shopLike;
+
+    public MenuVO(Integer shopNum, String shopName, String shopIntro, String shopContent, int shopLike){
+        this.shopNum = shopNum;
+        this.shopName = shopName;
+        this.shopIntro = shopIntro;
+        this.shopContent = shopContent;
+        this.shopLike = shopLike;
+    }
+
+    public static MenuVO sample(){
+        return new MenuVO(1,"fourSeason", "good","veryGood",5);
+    }
+
+    public static void main(String[] args) {
+        MenuVO vo = new MenuVO(1,"fourSeason", "good","veryGood",5);
+        System.out.println(new Gson().toJson(vo));
+    }
+
 
 }

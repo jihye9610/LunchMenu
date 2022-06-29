@@ -2,11 +2,15 @@ package com.widetns.lunchProject.lunchProject.shop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
@@ -26,7 +30,26 @@ public class MenuServiceImpl implements MenuService {
 
     // 글 상세보기
     public MenuVO detailShop(Integer shopNum) {
-        return menurepo.findById(shopNum).get();
+
+        return menurepo.findById(shopNum).get(); // Integer shopNum  .get();
     }
+
+    @Override
+    public void updateShop(MenuVO find) {
+        menurepo.save(find);
+    }
+
+    @Override
+    public void deleteShop(Integer id) {
+           menurepo.deleteById(id);
+
+    }
+
+
+
+
+
+
+
 }
 
