@@ -55,6 +55,7 @@ public class MenuController {
         return result;
     }
 
+
     @PutMapping("/detailShop/{id}")
     @ResponseBody
     public String updateShop(MenuVO menu ,@PathVariable Integer id){
@@ -80,6 +81,7 @@ public class MenuController {
     public void deleteShop(@PathVariable Integer shopNum){
         menuservice.deleteShop(shopNum);
     }
+
 
 }
 

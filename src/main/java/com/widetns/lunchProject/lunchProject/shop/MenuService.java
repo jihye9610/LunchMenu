@@ -18,4 +18,7 @@ public interface MenuService {
     // 글 삭제
     public void deleteShop(Integer id);
 
+    // 좋아요 구현
+    //public void likeheart(Integer shoqNum);
+
 }
