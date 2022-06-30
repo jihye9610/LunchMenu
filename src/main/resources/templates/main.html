@@ -22,17 +22,6 @@
         <main>
             <div class="container-fluid px-4">
                 <h1 class="mt-4">오늘의 추천 식당</h1>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
-                            <div class="card-body">추천 많은 식당</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <div>여기표시</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="card mb-4">
                     <div class="card-body">
@@ -100,18 +89,19 @@
                                     <div class="modal-header">
                                         <!--                    <h5 class="modal-title shopName" id="detailShopLabel"></h5>-->
                                         <input type="text" class="modal-title shopName" id="detailShopLabel" style="border:none"/>
-                                        <a href="#" class="likeheart"><i class="bi bi-heart"></i></a>
+                                        <a href="#" class="likeheart"><i class="bi bi-heart-fill" onclick="count('plus')"></i></a>
+                                        <p id="shopLikeresult"></p>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <input type="text" class="shopIntro" name="shopIntro" style="border:none">
                                         <hr />
                                         <!--                    <div class="shopContent"></div>-->
-                                        <input class="shopContent" name="shopContent" style="border:none" />
+                                        <textarea class="shopContent" name="shopContent" style="border: none; height: 200px; width: 450px"></textarea>
                                         <input type="hidden" id="deleteNum" name="deleteNum"  />
                                         <input type="hidden" id="shoName" name="shopName"/>
                                         <!--                    <input type="hidden" id="shopit" name="shopit"/>-->
-                                        <textarea type="hidden" id="shopContent" name="shopContent"/>
+                                        <input type="hidden" id="shopContent" name="shopContent"/>
                                         <br>
                                         <br>
                                         <button type="button" id="modify" class="btn btn-primary" >수정</button>
@@ -136,6 +126,8 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="./js/datatables-simple-demo.js"></script>
 <script>
+
+    // 상세보기
     $(document). on("click", "#modaltitle", function(){
 
         const shopNum = $(this).attr('abc')
@@ -150,6 +142,7 @@
                 $(".shopName").val(data.shopName);
                 $(".shopIntro").val(data.shopIntro);
                 $(".shopContent").val(data.shopContent);
+                $("#shopLikeresult").text(data.shopLike);
                 $("#deleteNum").val(data.shopNum);
                 <!--        $('#shoName').val(data.shopName);-->
                 <!--        $('#shopit').val(data.shopIntro);-->
@@ -163,7 +156,7 @@
     })
 
 
-
+    // 삭제
     $('#delete').click(function(){
 
         var id = $('#deleteNum').val();
@@ -183,15 +176,13 @@
         })
     })
 
-
+    // 수정
     $('#modify').click(function(){
 
         var id = $('#deleteNum').val();
         var title = $('.shopName').val();
         var intro = $('.shopIntro').val();
         var content = $('.shopContent').val();
-
-
 
         $.ajax({
             url: "/detailShop/" + id,
@@ -212,8 +203,15 @@
             }
         });
     })
+</script>
+<script>
+    // 좋아요 숫자
+    function count(type) {
+        var likeresult = document.getElementById('shopLikeresult').innerText;
+        likeresult++;
 
-
+        document.getElementById('shopLikeresult').innerText = likeresult;
+    }
 </script>
 
 </body>
