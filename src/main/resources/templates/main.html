@@ -43,7 +43,6 @@
                             <tr>
                                 <th>가게 이름</th>
                                 <th>한줄평</th>
-                                <th>좋아요</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,7 +50,6 @@
                                 <!--<td th:text="${shop.shopName}"></td>-->
                                 <td><a class="shopTitle" data-bs-toggle="modal" data-bs-target="#detailShop" th:href="@{#detailShop}" th:text="${shop.shopName}"></a></td>
                                 <td id="shopIntro" th:text="${shop.shopIntro}"></td>
-                                <td th:text="${shop.shopLike}"></td>
 
                             </tr>
                             </tbody>
@@ -113,7 +111,7 @@
                                         <input type="hidden" id="deleteNum" name="deleteNum"  />
                                         <input type="hidden" id="shoName" name="shopName"/>
                                         <!--                    <input type="hidden" id="shopit" name="shopit"/>-->
-                                        <input type="hidden" id="shopContent" name="shopContent"/>
+                                        <textarea type="hidden" id="shopContent" name="shopContent"/>
                                         <br>
                                         <br>
                                         <button type="button" id="modify" class="btn btn-primary" >수정</button>
