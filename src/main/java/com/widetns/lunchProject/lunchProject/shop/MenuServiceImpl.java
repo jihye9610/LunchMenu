@@ -28,5 +28,12 @@ public class MenuServiceImpl implements MenuService {
     public MenuVO detailShop(Integer shopNum) {
         return menurepo.findById(shopNum).get();
     }
+
+    // 좋아요 구현
+
+    /*@Override
+    public void likeheart(Integer shoqNum) {
+        menurepo.findById(shoqNum).get();
+    }*/
 }
 

@@ -40,6 +40,13 @@ public class MenuController {
         MenuVO result = menuservice.detailShop(shopNum);
         return result;
     }
+
+    // 좋아요 구현
+    /*@PostMapping("/detailshop/{shopNum}")
+    @ResponseBody
+    public void likeheart(@PathVariable Integer shopNum) {
+
+    }*/
 }
 
 
