@@ -4,6 +4,7 @@ package com.widetns.lunchProject.lunchProject.kakao;
 import com.google.gson.JsonParser;
 import com.widetns.lunchProject.lunchProject.entity.Member;
 import com.widetns.lunchProject.lunchProject.repository1.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.google.gson.JsonObject;
 
 
 @Service
+
 public class KakaoServiceImpl implements KakaoService{
 
     @Autowired
@@ -44,7 +46,7 @@ public class KakaoServiceImpl implements KakaoService{
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=89cb3c847ef00320bd9257e9588b87a8");
-            sb.append("&redirect_uri=http://localhost:8080/kakao/login");
+            sb.append("&redirect_uri=http://52.78.140.178:8080/kakao/login");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
