@@ -34,6 +34,7 @@ public class MenuServiceImpl implements MenuService {
         return menurepo.findById(shopNum).get(); // Integer shopNum  .get();
     }
 
+
     @Override
     public void updateShop(MenuVO find) {
         menurepo.save(find);
@@ -44,11 +45,6 @@ public class MenuServiceImpl implements MenuService {
            menurepo.deleteById(id);
 
     }
-
-
-
-
-
 
 
 }
