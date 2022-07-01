@@ -37,14 +37,13 @@ public class MenuController {
     }
 
     // 글 작성
-    @GetMapping ("/saveShop")  //  파라미터에 json으로 데이터 집어넣기 위해서 @RequestBody 어노테이션 넣겠음.
-    public String saveShop(MenuForm form) {
-        MenuVO vo = new MenuVO();
-        vo.setShopName(form.getShopName());
-        vo.setShopIntro(form.getShopIntro());
-        vo.setShopContent(form.getShopContent());
+    @GetMapping("/saveShop")  //  파라미터에 json으로 데이터 집어넣기 위해서 @RequestBody 어노테이션 넣겠음.
+    public ModelAndView saveShop(MenuVO vo) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("main");
+        mv.addObject("shoplist",  menuservice.getBoardList());
         menuservice.insertShop(vo);
-        return "redirect:main";
+        return mv;
     }
 
     // 글 상세보기
