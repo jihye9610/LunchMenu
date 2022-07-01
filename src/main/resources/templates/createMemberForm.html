@@ -43,25 +43,32 @@
 
 
     $(function(){
+
+
+
       $('#join').click(function(){
 
       var memberId = $("#memberId").val();
       var userName = $('#userName').val();
       var email = $('#email').val();
       var password = $('#password').val();
-      var checkDuplicate = $('#checkDuplicate').val();
+      var checkDuplicate = $('#checkDuplicate').attr('idCheck');
       var checkId = $('#idAvailable').val();
+      var idAvailable = $('#idAvailable').html();
+      var idNotAvailable = $('#idNotAvailable').html();
+
+
+<!--      if(idAvailable == null || idAvailable == "" || idNotAvailable == null || idNotAvailable == ""){-->
+<!--        alert("중복확인을 해주세요.")-->
+<!--        return;-->
+<!--      }-->
 
       if(userName == null || userName == ""){
-        alert('아이디를 입력해주세요.');
+        alert('이름을 입력해주세요.');
         $('#userName').focus();
         return;
       }
 
-<!--      if(checkDuplicate != "checkId"){-->
-<!--      alert('중복확인을 해주세요.');-->
-<!--      return;-->
-<!--      }-->
 
       if(email == null || email == ""){
         alert('이메일을 입력해주세요.');
@@ -75,11 +82,14 @@
         return;
       }
 
+
       if(password == null || password == ""){
         alert('비밀번호를 입력해주세요');
          $('#password').focus();
          return;
       }
+
+
       $('#joinForm').submit();
 
       });
@@ -147,9 +157,9 @@
         </div>
 
         <div class="col-md-6 mb-3">
-          <input  class="btn btn-primary btn-lg btn-block" type="button"  id="checkDuplicate" name="checkDuplicate" value="중복확인">
-          <div id="idAvailable" class="valid-feedback" style="display:none">사용 가능한 아이디입니다.</div>
-          <div  id="idNotAvailable" class="invalid-feedback" style="display:none">사용 불가능한 아이디입니다.</div>
+          <input  class="btn btn-primary btn-lg btn-block" type="button"  id="checkDuplicate" idCheck="" name="checkDuplicate" value="중복확인">
+          <div  type="text" id="idAvailable" class="valid-feedback" style="display:none">사용 가능한 아이디입니다.</div>
+          <div  type="text" id="idNotAvailable" class="invalid-feedback" style="display:none" >사용 불가능한 아이디입니다.</div>
         </div>
 
         <div class="mb-3">
