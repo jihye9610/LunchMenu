@@ -40,7 +40,7 @@ public class MenuController {
     @GetMapping("/saveShop")  //  파라미터에 json으로 데이터 집어넣기 위해서 @RequestBody 어노테이션 넣겠음.
     public ModelAndView saveShop(MenuVO vo) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("main");
+        mv.setViewName("redirect:/main");
         mv.addObject("shoplist",  menuservice.getBoardList());
         menuservice.insertShop(vo);
         return mv;
